@@ -2,6 +2,8 @@
 
 A Tensorflow 2.* implementation of the **Plackett-Luce model for monocular depth ranking** as presented at CVPR 2021.
 
+<img src="PLDepth_Overview.png" width="500" align="center">
+
 Please cite this work as follows:
 
 ```
