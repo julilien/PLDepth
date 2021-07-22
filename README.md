@@ -2,6 +2,10 @@
 
 A Tensorflow 2.* implementation of the **Plackett-Luce model for monocular depth ranking** as presented at CVPR 2021.
 
+<p align="center">
+<img src="PLDepth_Overview.png" width="500">
+</p>
+
 Please cite this work as follows:
 
 ```
@@ -35,7 +39,7 @@ This repository provides our PLDepth{Eff,Res}Net training implementation, togeth
 - `pldepth.models` includes the regarded model architectures, namely the ResNet- and EfficientNet-based models.
 - `pldepth.util` contains utility functions used throughout the project.
 
-A basic configuration file is given by `conf/run.ini`. Here, Mlflow parameters, logging settings and data paths for each dataset can be specified. Its worth to note that the `CACHE_PATH_PREFIX` specifies a location to which all intermediate results should be stored. As will be described later in the evaluation section, this directory also serves as entry point for the predictions of external baseline predictions, which are used for the final result calculation.
+A basic configuration file is given by `conf/run.ini`. Here, Mlflow parameters, logging settings and data paths for each dataset can be specified. Its worth to note that the `CACHE_PATH_PREFIX` specifies a location to which all intermediate results should be stored. Within our experiments as described in the paper, we used the dataset [HR-WSI](https://github.com/KexianHust/Structure-Guided-Ranking-Loss).
 
 ## Model Training
 
