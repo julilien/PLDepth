@@ -103,7 +103,7 @@ class RandomSamplingStrategy(SamplingStrategy):
         return result_matrix[np.argsort(dists)[::-1]][:batch_size]
 
 
-class MaskedRandomSamplingStrategy(RandomSamplingStrategy):
+class PurelyMaskedRandomSamplingStrategy(RandomSamplingStrategy):
     def __init__(self, model_params):
         super().__init__(model_params)
 
@@ -143,6 +143,16 @@ class MaskedRandomSamplingStrategy(RandomSamplingStrategy):
             result_matrix[i, :, 1] = gts_buffer
 
         return result_matrix, dists
+
+    def sample_masked_point_batch(self, image, mask, gt, batch_size, batch_size_factor=1.5):
+        result_matrix, dists = self.sample_masked_rankings(image, mask, gt, batch_size, batch_size_factor)
+
+        return result_matrix[:batch_size]
+
+
+class MaskedRandomSamplingStrategy(PurelyMaskedRandomSamplingStrategy):
+    def __init__(self, model_params):
+        super().__init__(model_params)
 
     def sample_masked_point_batch(self, image, mask, gt, batch_size, batch_size_factor=1.5):
         result_matrix, dists = self.sample_masked_rankings(image, mask, gt, batch_size, batch_size_factor)

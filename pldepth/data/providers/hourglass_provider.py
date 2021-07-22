@@ -4,7 +4,7 @@ import logging
 from tqdm import tqdm
 
 from pldepth.data.data_meta import TFDatasetDataProvider
-from pldepth.data.sampling import ThresholdedMaskedRandomSamplingStrategy
+from pldepth.data.sampling import ThresholdedMaskedRandomSamplingStrategy, PurelyMaskedRandomSamplingStrategy
 from pldepth.losses.losses_meta import DepthLossType
 import itertools
 
@@ -19,6 +19,7 @@ class HourglassLargeScaleDataProvider(TFDatasetDataProvider):
         self.val_consistency_masks = val_consistency_masks
 
         self.random_sampler = ThresholdedMaskedRandomSamplingStrategy(model_params, sampling_eq_threshold)
+        self.val_random_sampler = PurelyMaskedRandomSamplingStrategy(model_params)
 
         self.augmentation = augmentation
 
@@ -185,7 +186,7 @@ class HourglassLargeScaleDataProvider(TFDatasetDataProvider):
                 image = elem[0]
                 mask = elem[1]
                 gt = elem[2]
-                result[i] = self.sample_rankings(image, mask, gt, self.random_sampler, val_rankings_per_img,
+                result[i] = self.sample_rankings(image, mask, gt, self.val_random_sampler, val_rankings_per_img,
                                                  return_image=False)
                 pbar.update(1)
         return result
