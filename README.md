@@ -51,6 +51,11 @@ As an example, the following command trains a Plackett-Luce model for depth esti
 python3 pldepth/PLDepth.py --model_name ff_effnet --ranking_size 5 --initial_lr 0.0001 --seed 0
 ```
 
+## Pretrained Model
+
+A pretrained model (EfficientNetB5 based) can be found [here](https://drive.google.com/file/d/13I80Luz-xLrhQ9KewecTIWfo5_AQaXF7).
+To use it, just instantiate a model using `get_pl_depth_net` and call the Keras function `model.load_weights(<path>)` on the respective instantiated model.
+
 ## References
 
 [1] Ranftl, René, et al. "Towards robust monocular depth estimation: Mixing datasets for zero-shot cross-dataset transfer." IEEE Transactions on Pattern Analysis and Machine Intelligence (2020).
